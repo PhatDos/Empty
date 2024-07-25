@@ -1,0 +1,67 @@
+     1                                  section .data
+     2 00000000 05                          bNum db 5
+     3 00000001 80FF                        wNum dw -128
+     4 00000003 78563412                    dNum dd 0x12345678
+     5 00000007 001000200030004000-         List dw 0x1000, 0x2000, 0x3000, 0x4000, 0x5000
+     5 00000010 50                 
+     6 00000011 4E6574776964652041-         Hello db 'Netwide Assembly'
+     6 0000001A 7373656D626C79     
+     7 00000021 61<rept>                    line_of_a times 40 db 'a'
+     8                                      ;input vars
+     9 00000049 1210                        wNum1 dw 0x1012
+    10 0000004B 1000                        wNum2 dw 0x10
+    11                                  
+    12                                  section .bss
+    13 00000000 <res 00000005>              bArr resb 5
+    14 00000005 <res 0000000A>              wArr resw 5
+    15 0000000F <res 00000014>              cArr resb 20
+    16                                  
+    17                                      ;result
+    18 00000023 <res 00000004>              dSum resd 1
+    19 00000027 <res 00000002>              wSub resw 1
+    20 00000029 <res 00000004>              dProd resd 1
+    21 0000002D <res 00000002>              wDiv resw 1
+    22 0000002F <res 00000002>              wRem resw 1
+    23                                  
+    24                                  section .text
+    25                                  global _start
+    26                                  _start:
+    27                                      ;SUM
+    28 00000000 0FBF05[49000000]            movsx eax, word[wNum1]
+    29 00000007 0FBF1D[4B000000]            movsx ebx, word[wNum2]
+    30 0000000E 01D8                        add eax, ebx
+    31 00000010 A3[23000000]                mov [dSum], eax
+    32                                      ;SUB
+    33 00000015 66A1[49000000]              mov ax, word[wNum1]
+    34 0000001B 662B05[4B000000]            sub ax, [wNum2]
+    35 00000022 66A3[27000000]              mov [wSub], ax
+    36                                      ;Mul
+    37 00000028 66A1[49000000]              mov ax, [wNum1]
+    38 0000002E 66F725[4B000000]            mul word[wNum2]
+    39 00000035 66A3[29000000]              mov word[dProd], ax
+    40 0000003B 668915[2B000000]            mov [dProd + 2], dx
+    41                                      ;Div
+    42 00000042 66A1[49000000]              mov ax, [wNum1]
+    43 00000048 668B1D[4B000000]            mov bx, word[wNum2]
+    44 0000004F 66F7F3                      div bx
+    45 00000052 66A3[2D000000]              mov [wDiv], ax
+    46 00000058 668915[2F000000]            mov [wRem], dx
+    47                                  _task45a:
+    48 0000005F A0[00000000]                mov al, byte[bNum]
+    49 00000064 31F6                        xor esi, esi
+    50 00000066 B905000000                  mov ecx, 5
+    51                                  _aloop:
+    52 0000006B 8886[00000000]              mov byte[bArr + esi], al
+    53 00000071 46                          inc esi
+    54 00000072 E2F7                        loop _aloop
+    55                                  _task45b:
+    56 00000074 31F6                        xor esi, esi
+    57 00000076 B905000000                  mov ecx, 5
+    58                                  _bloop:
+    59 0000007B 668B8436[00000000]          mov ax, word[bArr + esi * 2]
+    60 00000083 66898436[07000000]          mov word[List + esi * 2], ax
+    61 0000008B 46                          inc esi
+    62 0000008C E2ED                        loop _bloop
+    63                                  _exit:
+    64 0000008E B801000000                  mov eax, 1
+    65 00000093 CD80                        int 0x80
