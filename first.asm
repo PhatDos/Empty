@@ -1,13 +1,13 @@
 
-len equ $-hello sdaksjdnakdaskjlkkadkdasdlks
-seon .textasdassasdasdasdsadas
-global _start
-_start:
-mov al, [a]aasdasd
-add al, [b]asdas
-mov [c], aldas
-mov eax, 4das
-testv ex, 1asda// this is test
+en equ $-hello sdaksjdnakdaskjlkkadkdasdlks
+eon .textasdassasdasdasdsadas
+lobal _start
+start:
+v al, [a]aasdasd
+d al, [b]asdas
+mov [c], a
+ eax, 4das
+testv ex, 1
 mov ecx, hello
 mov edx, len
 int 0x80
