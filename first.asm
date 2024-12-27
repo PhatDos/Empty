@@ -8,6 +8,12 @@ add al, [b]asdas
 mov [c], aldas
 mov eax, 4das
 testv ex, 1asda// this is test
+; start:            of test
+v al, [a]aasdasd
+d al, [b]asdas
+mov [c], a
+ eax, 4das
+testv ex, 1
 mov ecx, hello
 mov edx, len
 int 0x80
