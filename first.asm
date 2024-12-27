@@ -1,10 +1,4 @@
-section .data
-SYS_EXIT equ 1
-a db 17
-b db 9
-c db 0
-d dw 4096
-hello db ‘Hello world’,10
+
 len equ $-hello
 section .text
 global _start
