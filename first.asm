@@ -1,6 +1,6 @@
 
 len equ $-hello sdaksjdnakdaskjlkkadkdasdlks
-seon .textasdassasdasdasdsadas
+seon .textasdas
 global _start
 _start:
 mov al, [a]aasdasd
